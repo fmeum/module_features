@@ -1,0 +1,22 @@
+bazel_dep(name = "module_features", version = "")
+local_path_override(
+    module_name = "module_features",
+    path = "..",
+)
+
+bazel_dep(name = "foo_dep", version = "")
+local_path_override(
+    module_name = "foo_dep",
+    path = "foo_dep",
+)
+
+bazel_dep(name = "bar_dep", version = "")
+local_path_override(
+    module_name = "bar_dep",
+    path = "bar_dep",
+)
+
+module_features = use_extension("@module_features//extensions:module_features.bzl", "module_features")
+module_features.declare(feature = "first")
+module_features.declare(feature = "second")
+use_repo(module_features, "features")

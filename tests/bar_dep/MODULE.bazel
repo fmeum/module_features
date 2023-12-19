@@ -1,0 +1,9 @@
+module(name = "bar_dep")
+
+bazel_dep(name = "module_features", version = "")
+
+module_features = use_extension("@module_features//extensions:module_features.bzl", "module_features")
+module_features.declare(feature = "first_feature")
+module_features.declare(feature = "second_feature")
+module_features.declare(feature = "special_123_feature")
+use_repo(module_features, "features")

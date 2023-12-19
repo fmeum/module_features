@@ -1,0 +1,14 @@
+cc_library(
+    name = "foo_dep",
+    srcs = ["foo_dep.cc"],
+    hdrs = ["foo_dep.h"],
+    local_defines = select({
+        "@features//foo_dep:first_feature": ["HAS_FIRST_FEATURE"],
+        "//conditions:default": [],
+    }) + select({
+        "@features//foo_dep:second_feature": ["HAS_SECOND_FEATURE"],
+        "//conditions:default": [],
+    }),
+    visibility = ["//visibility:public"],
+    deps = ["@bar_dep"],
+)

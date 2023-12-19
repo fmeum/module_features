@@ -1,0 +1,16 @@
+cc_library(
+    name = "bar_dep",
+    srcs = ["bar_dep.cc"],
+    hdrs = ["bar_dep.h"],
+    local_defines = select({
+        "@features//bar_dep:first_feature": ["HAS_FIRST_FEATURE"],
+        "//conditions:default": [],
+    }) + select({
+        "@features//bar_dep:second_feature": ["HAS_SECOND_FEATURE"],
+        "//conditions:default": [],
+    }) + select({
+        "@features//bar_dep:special_123_feature": ["HAS_SPECIAL_FEATURE"],
+        "//conditions:default": [],
+    }),
+    visibility = ["//visibility:public"],
+)

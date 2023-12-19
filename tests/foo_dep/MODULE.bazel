@@ -1,0 +1,13 @@
+module(name = "foo_dep")
+
+bazel_dep(name = "module_features", version = "")
+bazel_dep(name = "bar_dep", version = "")
+
+module_features = use_extension("@module_features//extensions:module_features.bzl", "module_features")
+module_features.declare(feature = "first_feature")
+module_features.declare(feature = "second_feature")
+module_features.require(
+    feature = "first_feature",
+    module = "bar_dep",
+)
+use_repo(module_features, "features")

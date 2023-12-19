@@ -1,0 +1,8 @@
+cc_test(
+    name = "feature_test",
+    srcs = ["feature_test.cc"],
+    deps = [
+        "@bar_dep",
+        "@foo_dep",
+    ],
+)
